@@ -1,5 +1,7 @@
 # Linux学习计划
 
+## 通常操作
+
 *  I/O重定向操作
 
 streams       |     重定向符         |   内容
@@ -22,4 +24,86 @@ netstat -ant | grep :80
 
 *  进程管理
 
-`ps`
+常用`ps -ef`, `ps -aux`  具体参数查看`man`手册
+
+*  常用命令
+
+
+
+----
+
+## Shell编程
+
+* 变量
+
+赋值`=`两侧__无__空格 __无__`$`，引用时用`$`， 建议附加`{}`（区分变量与字符串边界）
+
+* 特殊符号
+
+类型      |     作用      |  e.g.
+  -----      |       ----       |   ----
+单引号`' '`         | 保持原样 无法转义          |   ```str='uname'; echo '$str'``` 打印 $str
+双引号`" "`       | 可替换变量 允许转义     |   ``` str='uname'; echo "$str"``` 打印 uname
+反引号`` ` ` ``  | 交给shell执行 | ``` str='uname'; echo `$str` ``` 打印 Linux
+分号`;`  |  用于分隔语法关键字或命令 |  ``` echo "hello"; echo"world" ``` 等价于两行代码换行
+单小括号`( )`   | 命令组、命令替换、初始化数组 |
+双小括号`(( ))`  | 整数扩展、重定义变量、代替`$`引用变量
+单中括号`[ ]`  |  与`test`等价、数组
+双中括号`[[ ]]`  |  关键字，替代`[ ]``
+花括号`{ }`  |  代码块，模式匹配替换结构
+
+> 括号 参考https://blog.csdn.net/tttyd/article/details/11742241
+
+* 参数传递
+
+参数处理          |           说明
+    ----                  |         ----
+  `$#`                |   传递到脚本的参数个数
+`$1` `$2`        |  第几个参数
+`$*` `$@`       |  以一个单字符串显示所有向脚本传递的参数。
+`$$`                  |  脚本运行的当前进程ID号
+`$-`                  |  显示Shell使用的当前选项
+`$?`                  |  显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
+
+* `if`语句
+
+```
+if condition
+then
+    command1
+elif condition2
+then
+    command2
+else
+    command3
+fi
+```
+
+`else`分支不可为空
+
+```
+if condition; then
+
+fi
+```
+
+* `for`语句
+
+```
+for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+```
+
+* `while`语句
+
+```
+while condition
+do
+    command
+done
+```
