@@ -50,7 +50,7 @@ netstat -ant | grep :80
 双引号`" "`       | 可替换变量 允许转义     |   ``` str='uname'; echo "$str"``` 打印 uname
 反引号`` ` ` ``  | 交给shell执行 | ``` str='uname'; echo `$str` ``` 打印 Linux
 分号`;`  |  用于分隔语法关键字或命令 |  ``` echo "hello"; echo"world" ``` 等价于两行代码换行
-单小括号`( )`   | 命令组、命令替换、初始化数组 |
+单小括号`( )`   | 命令组、命令替换、初始化数组
 双小括号`(( ))`  | 整数扩展、重定义变量、代替`$`引用变量
 单中括号`[ ]`  |  与`test`等价、数组
 双中括号`[[ ]]`  |  关键字，替代`[ ]``
@@ -111,3 +111,15 @@ do
     command
 done
 ```
+
+## gcc
+
+* 编译链接
+
+标志       |     含义         |   e.g.
+--------      |     ------          |  ----
+`CFLAGS` `CXXFLAGS`   |   编译器（`CC`）FLAGS; 环境变量 或 Makefile变量; 指定编译器的额外开关（优化，调试）    |   `-g`, `-O2`, `-Wall`, `-I/usr/local/include`
+`LDFLAGS`   |   链接器（`ld`）FLAGS; 一般为autoconf指定于./configure;           |  `-L/usr/local/bin`
+`-L` `-l`   |   `-L`为`-l`指定额外的库文件夹; `-l`指定在__链接__时的库文件,名称需包含"library"       |  多配合管道使用
+`LD_LIBRARY_PATH`  |   |
+`LIBRARY_PATH`  |   |A
