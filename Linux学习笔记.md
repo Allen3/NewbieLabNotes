@@ -116,10 +116,12 @@ done
 
 * 编译链接
 
+!GCC编译过程[gcc_compiling_flowchart.png]
+
 标志       |     含义         |   e.g.
 --------      |     ------          |  ----
 `CFLAGS` `CXXFLAGS`   |   编译器（`CC`）FLAGS; 环境变量 或 Makefile变量; 指定编译器的额外开关（优化，调试）    |   `-g`, `-O2`, `-Wall`, `-I/usr/local/include`
 `LDFLAGS`   |   链接器（`ld`）FLAGS; 一般为autoconf指定于./configure;           |  `-L/usr/local/bin`
-`-L` `-l`   |   `-L`为`-l`指定额外的库文件夹; `-l`指定在__链接__时的库文件,名称需包含"library"       |  多配合管道使用
-`LD_LIBRARY_PATH`  |   |
-`LIBRARY_PATH`  |   |A
+`-L` `-l`   |   __链接__ `-L`为`-l`指定额外的库文件夹; `-l`指定库文件,名称需包含"library"       |  静态库文件"libxxx.a" 被指定为 `-lxxx`（去掉前缀"lib"和扩展名".a"）
+`LIBRARY_PATH`  | 环境变量; 用于__链接__过程中寻找__静态__库文件; 在链接过程中的`-L<dir>`后搜索  |
+`LD_LIBRARY_PATH`  | 环境变量; 用于__程序__寻找__共享__库文件（作用于运行时）  |
