@@ -113,6 +113,8 @@ do
 done
 ```
 
+----
+
 ## gcc
 
 * gcc 编译过程
@@ -126,5 +128,46 @@ done
 `CFLAGS` `CXXFLAGS`   |   编译器（`CC`）FLAGS; 环境变量 或 Makefile变量; 指定编译器的额外开关（优化，调试）    |   `-g`, `-O2`, `-Wall`, `-I/usr/local/include`
 `LDFLAGS`   |   链接器（`ld`）FLAGS; 一般为autoconf指定于./configure;           |  `-L/usr/local/bin`
 `-L` `-l`   |   __链接__ `-L`为`-l`指定额外的库文件夹; `-l`指定库文件,名称需包含"library"       |  静态库文件"libxxx.a" 被指定为 `-lxxx`（去掉前缀"lib"和扩展名".a"）
-`LIBRARY_PATH`  | 环境变量; 用于__链接__过程中寻找__静态__库文件; 在链接过程中的`-L<dir>`后搜索  |
-`LD_LIBRARY_PATH`  | 环境变量; 用于__程序__寻找__共享__库文件（作用于运行时）  |
+`LIBRARY_PATH`  | 环境变量; 指定 __动态库__ 的位置　用于__链接__过程中寻找__静态__库文件; 在链接过程中的`-L<dir>`后搜索  |
+`LD_LIBRARY_PATH`  | 环境变量; 指定 __动态加载库__ 的位置 用于__程序__寻找__共享__库文件（作用于运行时）  |
+
+* 各类库文件
+
+    1. 静态库(".a")
+
+        1. 编译object文件。例如：cc -Wall -c ctest1.c ctest2.c
+        2. 创建库文件。例如：ar -cvq libctest.a ctest1.o ctest2.o
+        3. 可以通过ar -t查看.a文件中包含哪些.o
+        4. 构建符号表。ranlib libctest.a用于为.a创建符号表
+
+    2. 动态库(".so")
+
+        1. 编译object文件时使用-fPIC选项:
+        ```
+        gcc -Wall -fPIC -c *.c
+        ```
+        这个选项的目的是让编译器生成地址无关(position independent)的代码，这是因为，动态库是在运行期间链接的，变量和函数的偏移量是事先不知道的，需要链接以后根据offset进行地址重定向。
+
+        或者
+
+        2. 使用`-shared`链接:
+        ```
+        gcc -shared -Wl,-soname,libctest.so.1 -o libctest.so.1.0 *.o
+        ```
+        -shared选项是让动态库得以在运行期间被动态链接;-Wl,options是设置传递给ld(链接器)的参数，在上面的例子中，当链接器在链接.o时会执行ld -soname ibctest.so.1
+
+        或者
+
+        3. 创建软链:
+        上面的命令将最终输出一个动态库libctest.so.1.0，而出于习惯，会创建两个软链:
+        ```
+        mv libctest.so.1.0 /opt/lib
+        ln -sf /opt/lib/libctest.so.1.0 /opt/lib/libctest.so.1
+        ln -sf /opt/lib/libctest.so.1.0 /opt/lib/libctest.so
+        ```
+
+        libctest.so用于在编译期间使用-lctest让编译器找到动态库，而libctest.so.1用于在运行期间链接
+
+        `gcc -Wall -I/path/to/include-files -L/path/to/libraries prog.c -lctest -o prog`
+
+>　参考http://www.techug.com/post/linux-static-lib-dynamic-lib.html
