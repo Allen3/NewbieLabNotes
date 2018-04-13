@@ -114,9 +114,9 @@ done
 
 ## gcc
 
-* 编译链接
+* gcc 编译过程
 
-!GCC编译过程[gcc_compiling_flowchart.png]
+![GCC编译过程](gcc_compiling_flowchart.png)
 
 标志       |     含义         |   e.g.
 --------      |     ------          |  ----
