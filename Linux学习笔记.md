@@ -69,6 +69,7 @@ netstat -ant | grep :80
 `$-`                      |  显示Shell使用的当前选项
 `$?`                      |  显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
 
+> 参考[test1](./test1)
 
 * `if`语句
 
@@ -193,4 +194,4 @@ system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule_
 
 执行时调用`make`命令,自动搜索名称为"makefile"或"Makefile"的文件,指定自定义文件参数为`-f`
 
-
+>  参考[test2](./test2/)
