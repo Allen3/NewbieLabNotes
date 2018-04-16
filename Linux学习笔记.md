@@ -171,3 +171,24 @@ done
         `gcc -Wall -I/path/to/include-files -L/path/to/libraries prog.c -lctest -o prog`
 
 >　参考http://www.techug.com/post/linux-static-lib-dynamic-lib.html
+
+*  ELF文件概念
+
+ELF(Exutable and Linkable Format)文件代表了可执行文件、目标代码(.o)、共享库文件和转储文件(core dumps)。在设计上，ELF文件是 __跨平台__ 的，不限制于和任何CPU与指令集。
+
+----
+
+## Makefile
+
+* 规则
+
+```
+target: dependencies
+    system command(s)
+```
+
+target: 通常为程序生成的可执行文件或.o文件，同样也可为所需执行的命令，如`clean`
+dependencies(prerequisite): 作为生成target的输入文件 可以有 __零__ 个或多个
+system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule__ 即缩进由 __\tab__ 字符表示
+
+执行时调用`make`命令,自动搜索
