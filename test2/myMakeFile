@@ -1,0 +1,19 @@
+CC=g++
+CFLAGS=-c -Wall
+LDFLAGS=
+SOURCES=hello.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=hello
+
+all: $(SOURCES) $(EXECUTABLE)
+	
+#$@ is an automatic variable referencing the target file, file.o.
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+#It's a suffix rule telling make how to turn file.cpp into file.o for an arbitrary file.
+#$< is an automatic variable referencing the source file, file.cpp in the case of the suffix rule.
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+
