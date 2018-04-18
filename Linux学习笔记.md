@@ -201,3 +201,44 @@ system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule_
 ----
 
 ## pthread多线程编程
+
+*  进程(process) v.s. 线程(thread)
+
+进程包含信息:
+
+* Process ID, process group ID, user ID, and group ID
+* Environment
+* Working directory
+* Program instructions
+* Registers
+* Stack
+* Heap
+* File descriptors
+* Signal actions
+* Shared libraries
+* Inter-process communication tools (such as message queues, pipes, semaphores, or shared memory). 
+
+线程包含信息:
+
+* Stack pointer
+* Registers
+* Scheduling properties (such as policy or priority)
+* Set of pending and blocked signals
+* Thread specific data.
+
+![进程 vs 线程](diff_process_thread.png)
+
+通常将pthread API分为四类:(以`pthread_`为前缀)
+
+名称				|		作用
+----				|		----
+Thread management	|	线程的直接操作creating,detaching,joining;并包含设置、查询线程属性函数
+Mutexes				|	处理**同步**，提供创建、销毁、加锁、解锁功能
+Condition variables	|	负责落实共享`mutex`的线程间进行通信
+Synchronization		|	负责管理读/写锁和同步屏障
+
+> 并行编程中`join`和`barrier`的区别
+
+> `join`后，总体变为**串行**，即只有一个线程在运行;
+
+> `barrier`后，仅仅是所有线程在此同步，之后继续保持**并行**.
