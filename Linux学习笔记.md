@@ -242,3 +242,22 @@ Synchronization		|	负责管理读/写锁和同步屏障
 > `join`后，总体变为**串行**，即只有一个线程在运行;
 
 > `barrier`后，仅仅是所有线程在此同步，之后继续保持**并行**.
+
+----
+
+##cpuid测试
+
+在学习测试[Determinator](https://github.com/dedis/Determinator)过程中，调用了此函数
+
+在C中允许的汇编级语法 - "Extended ASM"
+```C
+asm [volatile] ( AssemblerTemplate 
+	: OutputOperands 
+    [ : InputOperands
+    [ : Clobbers ] ])
+```
+详见https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
+
+同时需注意，`Intel`和`AMD`的**大端、小端**表示的区别。
+
+> 参考[cpuidtest](./cpuidtest/)
