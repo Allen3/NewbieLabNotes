@@ -13,10 +13,17 @@ The DOM is dynamic, and can change. The outermost layer of the DOM, the layer th
 
 ```javascript
 $(document).ready(function() {
-   // all custom jQuery will go here
+	// all custom jQuery will go here
 });
 
 ```
+And according to the [jQuery API docs](http://api.jquery.com/category/core/), there is a short hand for the form above:
+```javascript
+$(function(){
+	// all custom jQuery will go here
+});
+```
+
 
 All jQuery code you write will be wrapped in the above code.
 jQuery will detect this state of readiness so that code included inside this function will only run once the DOM is ready for JavaScript code to execute. 
