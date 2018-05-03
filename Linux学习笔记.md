@@ -69,7 +69,7 @@ netstat -ant | grep :80
 `$-`                      |  显示Shell使用的当前选项
 `$?`                      |  显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
 
-> 参考[test1](./test1)
+> 参考[test1](./tests/test1)
 
 * `if`语句
 
@@ -120,7 +120,7 @@ done
 
 * gcc 编译过程
 
-![GCC编译过程](gcc_compiling_flowchart.png)
+![GCC编译过程](assets/gcc_compiling_flowchart.png)
 
 * 重要参数与标志
 
@@ -194,7 +194,7 @@ system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule_
 
 执行时调用`make`命令,自动搜索名称为"makefile"或"Makefile"的文件,指定自定义文件参数为`-f`
 
->  参考[test2](./test2/) 
+>  参考[test2](./tests/test2/) 
 
 >  其中myMakeFile采用了[suffix rule](https://www.gnu.org/software/make/manual/html_node/Suffix-Rules.html)
 
@@ -226,7 +226,7 @@ system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule_
 * Set of pending and blocked signals
 * Thread specific data.
 
-![进程 vs 线程](diff_process_thread.png)
+![进程 vs 线程](assets/diff_process_thread.png)
 
 通常将pthread API分为四类:(以`pthread_`为前缀)
 
@@ -245,7 +245,7 @@ Synchronization		|	负责管理读/写锁和同步屏障
 
 ----
 
-##cpuid测试
+## cpuid测试
 
 在学习测试[Determinator](https://github.com/dedis/Determinator)过程中，调用了此函数
 
@@ -258,6 +258,12 @@ asm [volatile] ( AssemblerTemplate
 ```
 详见https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
 
+为获取处理器的型号，需操作四个寄存器，`%eax`, `%ebx`, `%ecx`, `%edx`，对`%eax`赋值为**0x00**，之后调用`cpuid`，之后四个寄存器内容如下:
+
+* `%eax`: 最高的基础调用参数(CPUID leaf)
+* `%ebx` `%edx` `%ecx`: (按上述顺序)保存12个字符的厂家ID，通常Intel为"GenuineIntel"，AMD为"AuthenticAMD"
+
 同时需注意，`Intel`和`AMD`的**大端、小端**表示的区别。
 
-> 参考[cpuidtest](./cpuidtest/)
+> 参考[cpuidtest](./tets/cpuidtest/)
+> 参考[cpuid](https://en.wikipedia.org/wiki/CPUID)
