@@ -8,3 +8,10 @@ $(document).ready(function(){
 		$(".overlay").slideToggle();
 	});
 });
+
+(function(){ 
+	    var foo = 3; 
+		    alert(foo); 
+})(); 
+
+alert(foo); 

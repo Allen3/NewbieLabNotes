@@ -24,6 +24,8 @@ $(function(){
 });
 ```
 
+This form is an anonymous function call.
+
 
 All jQuery code you write will be wrapped in the above code.
 jQuery will detect this state of readiness so that code included inside this function will only run once the DOM is ready for JavaScript code to execute. 
@@ -95,3 +97,14 @@ Below is a brief overview of some of the most commonly used event methods.
 [jQuery effects](http://api.jquery.com/category/effects/) work hand-in-hand with events by allowing you to add animations and otherwise manipulate elements on the page.
 
 > For example refer to the [jQuerytest](./tests/jQuerytest/index.html)
+
+Normally we see jQuery scripts with this given blocks:
+```javascript
+(function($){
+	$(function(){
+	});		// end of document ready
+})(jQuery);		// end of jQuery name space
+```
+
+The outer blocks is [IIFE(Immediately Invoked Function Expression)](http://benalman.com/news/2010/11/immediately-invoked-function-expression/).
+The purpose of passing jQuery in to the parenthesis is to provide local scoping to the global variable. This helps reduce the amount of overhead of looking up the $ variable, and allows better compression / optimization for minifiers in some cases.
