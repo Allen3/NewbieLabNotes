@@ -8,7 +8,8 @@ Each HTML element is considered a node in the DOM - an object that JavaScript ca
 
 > **DOM** v.s. **TML Source**
 
-> The page source is exactly what is written in the HTML file. It is static and will not change, and will not be affected by JavaScript. The DOM is dynamic, and can change.The outermost layer of the DOM, the layer that wraps the entire <html> node, is the document object. 
+> The page source is exactly what is written in the HTML file. It is static and will not change, and will not be affected by JavaScript.
+The DOM is dynamic, and can change. The outermost layer of the DOM, the layer that wraps the entire `<html>` node, is the document object. 
 
 ```javascript
 $(document).ready(function() {
@@ -65,3 +66,25 @@ Generally, classes and ids are what you will encounter the most — classes when
 
 ## jQuery Events
 
+An event is any time the user interacts with the browser.
+
+You can view a [full list of jQuery event methods](https://api.jquery.com/category/events/).
+Below is a brief overview of some of the most commonly used event methods.
+
+* `click()` - Click: executes on a single mouse click.
+
+* `hover()` - Hover: executes when the mouse is hovered over an element. mouseenter() and mouseleave() apply only to the mouse entering or leaving an element, respectively.
+
+* `submit()` - Submit: executes when a form is submitted.
+
+* `scroll()` - Scroll: executes when the screen is scrolled.
+
+* `keydown()` - Keydown: executes when you press down on a key on the keyboard.
+
+----
+
+## jQuery Effects
+
+[jQuery effects](http://api.jquery.com/category/effects/) work hand-in-hand with events by allowing you to add animations and otherwise manipulate elements on the page.
+
+> For example refer to the [jQuerytest](./tests/jQuerytest/index.html)
