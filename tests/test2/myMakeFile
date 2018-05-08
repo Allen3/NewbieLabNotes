@@ -7,7 +7,6 @@ EXECUTABLE=hello
 
 all: $(SOURCES) $(EXECUTABLE)
 	
-<<<<<<< HEAD
 #$@ is an automatic variable referencing the target file, file.o.
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
