@@ -60,3 +60,19 @@ Please note the diff between `NaN` and `Infinity`.
 For math, Values `null`/`undefined` are converted to numbers: `null` -> `0`, while `undefined` -> `NaN`.
 
 > `==` for `null`/`undefined` works without any conversions. They equal each other and don't equal anything else.
+
+## Logical Operators
+
+### OR(`||`)
+Not only dealing with booleans. A chain of OR `||` returns the first truthy value or the last one if no such value is found.
+And two typical interesting examples are as below:
+
+1. Getting the first value from the list of variables or expressions.
+2. Short-circuit evaluation. (A shortter way to do `if`)
+
+See the [OR special usage](../tests/jstest/valueTest.js);
+
+### AND(`&&`)
+### NOT(`!`)
+Sometimes we use `!!expression` to replace the `Boolean(expression)`.
+
