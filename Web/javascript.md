@@ -76,3 +76,42 @@ See the [OR special usage](../tests/jstest/valueTest.js);
 ### NOT(`!`)
 Sometimes we use `!!expression` to replace the `Boolean(expression)`.
 
+## Loops: while and for
+* Labels for break/continue
+
+Sometimes we need to break out from multiple nested loops at once.
+A *label* is an identifier with a colon before a loop:
+```javascript
+labelName: for (...) {
+
+}
+```
+> The call to a break/continue is only possible from inside the loop, and the label must be somewhere upwards from the directive. It does not equal to GOTO.
+
+## Functions
+
+A function with an empty `return` or without it returns `undefined`.
+
+* *Function Declaration*:
+
+```javascript
+function greet() {
+    console.log("Hooli yeah!");
+}
+```
+
+* *Function Expression*:
+
+```javascript
+let greet = function() {
+    console.log("Hooli Yeah!");
+}
+```
+In javascript, a function is a value, so we can deal with it as a value.
+
+> When using `console.log()` to print a function expression's variable, what I found is that in Chrome it shows the source code of the function while in node.js' V8 engine, it shows the function name inside a pair of brackets.
+
+### Anonymous functions
+The parameters inside the function declaration directive, if represent functions or not, should not be followed by `()`. It's like the pointer concept from C language.
+
+See [Callback functions demo](../tests/jstest/functionTest.js)
