@@ -18,6 +18,14 @@ console.log(data);
 
 //-----
 // Callback functions demo
+
+ask("ojbK", 
+    function() {
+        console.log("YES OJBK")},
+    function() {
+        console.log("No ojbk");}
+);
+
 function ask(msg, yes, no) {
     if (msg == "ojbk")
         yes();
@@ -26,8 +34,6 @@ function ask(msg, yes, no) {
 }
 
 ask("ojbK", 
-    function() {
-        console.log("YES OJBK")},
-    function() {
-        console.log("No ojbk");}
+    () => console.log("YES OJBK"),
+    () => console.log("No ojbk")
 );

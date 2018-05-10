@@ -107,11 +107,19 @@ let greet = function() {
     console.log("Hooli Yeah!");
 }
 ```
+> In javascript engine, a _Function Expression_ is created when the execution reaches it and is usable from then on. However, a _Function Declaration_ is usable in the whole script/**code block**.(Js engine first looks for _Function Declaration_ before executes exact code. And the **code block** means the scope of the funciton resides in)
+
 In javascript, a function is a value, so we can deal with it as a value.
 
 > When using `console.log()` to print a function expression's variable, what I found is that in Chrome it shows the source code of the function while in node.js' V8 engine, it shows the function name inside a pair of brackets.
 
-### Anonymous functions
+### Anonymous Functions
 The parameters inside the function declaration directive, if represent functions or not, should not be followed by `()`. It's like the pointer concept from C language.
 
 See [Callback functions demo](../tests/jstest/functionTest.js)
+
+Besides, another type of *Anonymous Function* is *Arrow Function(Lambda Expression)* and the form is 
+```javascript
+let func = (arg1, arg2, ...argN) => expression
+```
+and the `()` could be ignored if only one argument exists.
