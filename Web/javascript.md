@@ -107,7 +107,7 @@ let greet = function() {
     console.log("Hooli Yeah!");
 }
 ```
-> In javascript engine, a _Function Expression_ is created when the execution reaches it and is usable from then on. However, a _Function Declaration_ is usable in the whole script/**code block**.(Js engine first looks for _Function Declaration_ before executes exact code. And the **code block** means the scope of the funciton resides in)
+> In javascript engine, a *Function Expression* is created when the execution reaches it and is usable from then on. However, a *Function Declaration* is usable in the whole script/**code block**.(Js engine first looks for *Function Declaration* before executes exact code. And the **code block** means the scope of the funciton resides in)
 
 In javascript, a function is a value, so we can deal with it as a value.
 
@@ -123,3 +123,67 @@ Besides, another type of *Anonymous Function* is *Arrow Function(Lambda Expressi
 let func = (arg1, arg2, ...argN) => expression
 ```
 and the `()` could be ignored if only one argument exists.
+
+## Code Equality
+
+### Coding style
+Some example cheatsheets:
+* [Google Javascript Style Guide](https://google.github.io/styleguide/jsguide.html)
+* [Airbnb Javascript Style Guide](https://github.com/airbnb/javascript)
+
+Automated linters:
+
+* [ESLint](https://eslint.org)
+
+Comments style:
+
+Try to avoid explanatory comments and these comments are good:
+
+* **Describe the architecture**
+
+Provide a high-level overview of compoenents, how they interact, what's the control flow in various situations... There's a special diagram language [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) for high-level architecture diagrams.
+
+* **Document a function usage**
+
+There's a special syntax [JSDoc](https://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+
+* **Why is the task solved this way?**
+
+When the solution you give is not so intuitive and seems like "suboptimal" solution, you should write comments to explain.
+
+Try to become a *Code Master*? Then follow this article and step on the [*Ninja Paths*](https://javascript.info/ninja-code).
+
+## Automated Testing
+
+Javascript libraries for tests(in-browser & server-side testing):
+
+* [Mocha](https://mochajs.org) - the core framwork.
+* [Chai](www.chaijs.com) - the library with many assertions.
+* [Sinon](sinonjs.org) - a library to spy over functions, emulate buil-in functions and more.
+
+Let's use a tecnhique named [Behavior Driven Development(BDD)](https://en.wikipedia.org/wiki/Behavior-driven_development): test & documentation & examples.
+
+The development flow:
+
+1. An initial *spec* is written, with tests for the most basic functionality.
+2. An initial implementation is created.
+3. To check whether it works, we run the testing framework **Mocha** that runs the *spec*. Errors are displayed. We make corrections until everything works.
+4. Now we have a working initial implementation with tests.
+5. We add more use casees to the *spec*, probably not yet supported by the implementations. Tests start to fail.
+6. Go to 3, update the implementation till tests give no errors.
+7. Repeat steps 3-6 till the functionality is ready.
+
+See the [Automated Test Demo](../tests/jstest/mochaTest.html)
+
+## Polyfills
+As js evolves steadily, certain modern features are not fully supported by some engines. As a result, **Babel** comes to the rescue.
+
+[Babel](https://babeljs.io) is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). It rewrites modern JavaScript code into the previous standard and has two features:
+
+* The transpiler program, which rewrites the code.
+* The **polyfill**, which helps to write a special script implements *new functions*
+
+Two interesting polyfills are:
+
+* [babel polyfill](https://babeljs.io/docs/usage/polyfill) that supports a lot, but is big.
+* [polyfill.io](https://polyfill.io/v2/docs) service that allows to load/construct polyfills on-demand, depending on the features we need.
