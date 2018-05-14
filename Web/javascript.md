@@ -187,3 +187,57 @@ Two interesting polyfills are:
 
 * [babel polyfill](https://babeljs.io/docs/usage/polyfill) that supports a lot, but is big.
 * [polyfill.io](https://polyfill.io/v2/docs) service that allows to load/construct polyfills on-demand, depending on the features we need.
+
+## Objects
+
+Two ways to declare *empty object*:
+```javascript
+let user = new Object();
+let user = {};
+```
+
+Two ways to retrieve objects' properties:
+```javascript
+user.name
+user["last name"]   //user[key] mode
+```
+The second way(with square bracket) is much more flexible as the `key` variable could be calculated at run-time.
+
+With square brackets, we can declare *Computed properties*
+```javascript
+let fruit = "apple";    //Or strings up to user's input
+
+let bag = {
+    [fruit] : 5
+}
+
+console.log( bag.fruit );
+```
+This is much more powerful but also cumbersome.
+
+> A special name(`__proto__`) gets special treatment for historical reasons and couldn't be set to a non-object value.
+
+For shorthand property value, see [Property value shorthand Sample](../tests/jstest/objtest.js)
+
+### Existence check
+A notable objects feature is that it's possible to access any propert. There will be no error if the property doesn't exist! With only `undefined` returned if so. And two ways to check.
+```javascript
+let user = {};
+
+console.log( user.noSuchProperty === undefined );
+console.log( "noSuchProperty" in user );  // Property name shall be quoted.
+```
+
+> The `in` syntax would fail if the property is explicitly assigned as `undefined`.
+
+When trying to compare two objects(actually works on the references), the `==` and `===` behave exactly the same way.
+
+### Cloning and merging, `Object.assign`
+
+If we want to clone the object instead of just creating another reference pointing to it.
+```javascript
+Object.assign(dest[, src1, src2, src3...]) // The return value is also the dest.
+```
+This directive copies all the properties from `src` into `dest`. If the receiving object already has the same named property, it will be overwritten.
+
+For *Deep Cloning*, a simply `Object.assign()` would not resolve the problem because the inner object won't be cloned, instead a reference **sharing the same object** being created. Thus, `Structured cloning algorithm` is required, and a library [lodash](https://lodash.com) supports such a feature.
