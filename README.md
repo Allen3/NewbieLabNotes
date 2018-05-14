@@ -25,7 +25,20 @@ General List:
 Schedule: @May, 10th, 2018
 
 - [x] Section **Anomymous functions**, notes about conventional approaches for identifying parameters beween ordinary variables and function variables.
-- [ ] New Chapter **Data types**
+
+Schedule: @May, 14th, 2018
+
+- New Chapter **Objects: the basics** Start
+- [ ] Section Objects
+- [ ] Garbage collection
+- [ ] Symbol type
+- [ ] Object methods, "this"
+- [ ] Object to primitive conversation
+- [ ] Constructor, operator "new"
+
+Pending Tasks:
+
+- New Chapter **Data types** Start
 - [ ] Section [Methods of primitives](https://javascript.info/primitives-methods)
 - [ ] Section [Numbers](https://javascript.info/number)
 - [ ] Section [Strings](https://javascript.info/string)
