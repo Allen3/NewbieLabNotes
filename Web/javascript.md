@@ -240,4 +240,6 @@ Object.assign(dest[, src1, src2, src3...]) // The return value is also the dest.
 ```
 This directive copies all the properties from `src` into `dest`. If the receiving object already has the same named property, it will be overwritten.
 
-For *Deep Cloning*, a simply `Object.assign()` would not resolve the problem because the inner object won't be cloned, instead a reference **sharing the same object** being created. Thus, `Structured cloning algorithm` is required, and a library [lodash](https://lodash.com) supports such a feature.
+For *Deep Cloning*, a simply `Object.assign()` would not resolve the problem because the inner object won't be cloned, a reference **sharing the same object** being created instead. Thus, `Structured cloning algorithm` is required, and a library [lodash](https://lodash.com) supports such a feature.
+
+## Symbol Type

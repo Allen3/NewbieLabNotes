@@ -30,7 +30,7 @@ Schedule: @May, 14th, 2018
 
 - New Chapter **Objects: the basics** Start
 - [x] Section [Objects](https://javascript.info/object)
-- [ ] Section [Garbage collection](https://javascript.info/garbage-collection)
+- [x] Section [Garbage collection](https://javascript.info/garbage-collection)
 - [ ] Section [Symbol type](https://javascript.info/symbol)
 - [ ] Section [Object methods, "this"](https://javascript.info/object-methods)
 - [ ] Section [Object to primitive conversation](https://javascript.info/object-toprimitive)
