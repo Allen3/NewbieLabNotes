@@ -30,3 +30,26 @@ for (let property in person) {
 }
 
 console.log(person[id]);
+
+//`this` edge-case
+function makeObj_v1() {
+    return {
+        tag: "Johnny",
+        ref: this,
+    };
+};
+
+function makeObj_v2() {
+    return {
+        tag: "Johnny",
+        ref() {
+            return this;
+        },
+    };
+}
+
+let object = makeObj_v1();
+console.log(object.ref);
+
+object = makeObj_v2();
+console.log(object.ref());

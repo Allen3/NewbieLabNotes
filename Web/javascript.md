@@ -263,3 +263,6 @@ Using `Symbol.for(key)`, we can retrieve the same-named symbols from *global sym
 Similarly, there exists a reverse call: `Symbol.keyFor(symbol)`.
 
 Also, many system symbols are used by JavaScript internally, and we can check them out in the [Well-known symbols](https://tc39.github.io/ecma262/#sec-well-known-symbols) table.
+
+## "this" from OOP
+In JavaScript, `this` is calculated dynamically which means the it is up to the context instead of the place where it was initially declared. See the ['this' edge-case demo](../tests/jstest/objtest.js).
