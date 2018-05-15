@@ -15,3 +15,18 @@ function makeUser(name, age) {
 
 let user = makeUser("Johnny", 20);
 console.log(user);
+
+// Symbol test
+let id = Symbol("id");
+let person = {    
+    "First Name" : "Allen",
+    "Last Name" : "Yang",
+    age : 23,
+};
+person[id] = 123;
+
+for (let property in person) {
+    console.log(property);
+}
+
+console.log(person[id]);

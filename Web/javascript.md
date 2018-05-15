@@ -243,3 +243,23 @@ This directive copies all the properties from `src` into `dest`. If the receivin
 For *Deep Cloning*, a simply `Object.assign()` would not resolve the problem because the inner object won't be cloned, a reference **sharing the same object** being created instead. Thus, `Structured cloning algorithm` is required, and a library [lodash](https://lodash.com) supports such a feature.
 
 ## Symbol Type
+"Symbol" value represents a unique identifier. Even created with same description, symbols do not equal each other.
+```javascript
+let id = Symbol("symbolName");  //symbolName is used to describe the symbol
+```
+> Symbols don't auto-convert to a string
+
+Thus, symbols allow us to create "hidden" properties of an object, using `[]` to retrieve rather than `.` syntax.
+```js
+let id = Symbol("id");
+user[id] = 111;     //Using user.id would return null however.
+```
+And symbolic properties do not participate in `for..in` loop, but work in `Object.assign()` method.
+> Refer the [Symbol test](../tests/jstest/objtest.js)
+
+### Global Symbols
+Using `Symbol.for(key)`, we can retrieve the same-named symbols from *global symbol registry* which holds all the symbols globally. This call returns an existed or a new symbol by the given `key`.(This is for application-wide symbol)
+
+Similarly, there exists a reverse call: `Symbol.keyFor(symbol)`.
+
+Also, many system symbols are used by JavaScript internally, and we can check them out in the [Well-known symbols](https://tc39.github.io/ecma262/#sec-well-known-symbols) table.
