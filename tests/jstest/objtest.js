@@ -48,11 +48,22 @@ function makeObj_v2() {
     };
 }
 
-let object = makeObj_v1();
-console.log(object.ref);
+// let object = makeObj_v1();
+// console.log(object.ref);
 
 object = makeObj_v2();
 console.log(object.ref());
+
+// object to primitive conversion
+let testObj = {
+    name : "Depp",
+    money: 1000,
+    [Symbol.toPrimitive](hint) {
+        console.log(`hint: ${hint}`);        
+    },
+};
+
+console.log(+testObj);
 
 // new.target sample
 function Account(name) {

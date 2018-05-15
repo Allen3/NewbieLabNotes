@@ -267,6 +267,28 @@ Also, many system symbols are used by JavaScript internally, and we can check th
 ## "this" from OOP
 In JavaScript, `this` is calculated dynamically which means the it is up to the context instead of the place where it was initially declared. See the ['this' edge-case demo](../tests/jstest/objtest.js).
 
+## Object to primitive conversion
+A built-in symbol named `Symbol.toPrimitive` is used to name the conversion method
+```js
+obj[Symbol.toPrimitive] = function(hint) {
+    //return a primitive value
+    // hint = one of "string", "number", "default"
+}
+```
+And 3 types of hints are available:
+
+* `string` : for `alert` and other string conversions
+* `number` : for maths
+* `default` : few operators
+
+> For concrete codes, refer to the [object to primitive conversion sample](../tests/jstest/objtest.js)
+
+After `Symbol.toPrimitive`, JavaScript engines tries to find the following methods in order:
+* `toString` -> `valueOf` for "string" hint.
+* `valueOf` -> `toString` otherwise.
+
+*Only the `toString` method* shall be implemented by ourselves if we want to handle all primitive conversions.
+
 ## Constructor, operator "new"
 Constructors are intended to implement reusable object creation code. And two *conventions*(not rules) of constructor functions:
 * They are named with capital letter first
