@@ -53,3 +53,15 @@ console.log(object.ref);
 
 object = makeObj_v2();
 console.log(object.ref());
+
+// new.target sample
+function Account(name) {
+    if (!new.target) {
+        console.log("Creating new instance using new syntax...")
+        return new Account(name);
+    }
+    this.name = name;
+}
+
+let john = Account("John");
+console.log(john.name);

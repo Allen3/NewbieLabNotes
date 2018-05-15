@@ -36,7 +36,7 @@ Schedule: @May, 15th, 2018
 - [x] Section [Symbol type](https://javascript.info/symbol)
 - [x] Section [Object methods, "this"](https://javascript.info/object-methods)
 - [ ] Section [Object to primitive conversation](https://javascript.info/object-toprimitive)
-- [ ] Section [Constructor, operator "new"](https://javascript.info/constructor-new)
+- [x] Section [Constructor, operator "new"](https://javascript.info/constructor-new)
 
 Pending Tasks:
 

@@ -266,3 +266,44 @@ Also, many system symbols are used by JavaScript internally, and we can check th
 
 ## "this" from OOP
 In JavaScript, `this` is calculated dynamically which means the it is up to the context instead of the place where it was initially declared. See the ['this' edge-case demo](../tests/jstest/objtest.js).
+
+## Constructor, operator "new"
+Constructors are intended to implement reusable object creation code. And two *conventions*(not rules) of constructor functions:
+* They are named with capital letter first
+* They should be executed only with `new` operator
+
+```js
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+let personObj = new Person("Allen", "Yang");
+```
+Which, in other words, does something like:
+```js
+function Person(firstName, lastName) {
+    // this = {};   (implicitly)
+
+    // add properties to this
+    this.firstName = firstName;
+    this.lastName = lastName;
+
+    // reurn this;  (implicitly)
+}
+```
+
+If we have many lines of code all about creation of a single complex object, we can wrap them in constructor function, which can't be called again and aims to encapsulate the code constructing the single object.
+```js
+let target = new function() {
+    this.propertyOne = ...;
+    this.propertyTwo = ...;
+
+    // Other complex logic and statements...
+}
+```
+
+A special property `new.target` could be used to check whether the function is called through `new` syntax, refer to the [new.target sample](../tests/jstest/objtest.js)
+
+Literally, `new` makes it obvious that new object is being created.
+
