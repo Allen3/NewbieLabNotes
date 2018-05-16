@@ -38,12 +38,12 @@ Schedule: @May, 15th, 2018
 - [x] Section [Object to primitive conversation](https://javascript.info/object-toprimitive)
 - [x] Section [Constructor, operator "new"](https://javascript.info/constructor-new)
 
-Pending Tasks:
+Schedule: @May, 16th, 2018
 
 - New Chapter **Data types** Start
-- [ ] Section [Methods of primitives](https://javascript.info/primitives-methods)
-- [ ] Section [Numbers](https://javascript.info/number)
-- [ ] Section [Strings](https://javascript.info/string)
+- [x] Section [Methods of primitives](https://javascript.info/primitives-methods)
+- [x] Section [Numbers](https://javascript.info/number)
+- [x] Section [Strings](https://javascript.info/string)
 - [ ] Section [Arrays](https://javascript.info/array)
 - [ ] Section [Array methods](https://javascript.info/array-methods)
 - [ ] Section [Iterables](https://javascript.info/iterable)

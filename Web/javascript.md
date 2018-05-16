@@ -283,6 +283,11 @@ And 3 types of hints are available:
 
 > For concrete codes, refer to the [object to primitive conversion sample](../tests/jstest/objtest.js)
 
+Thus, sometimes we use an unary `+` before a number primitive to coerce it into number type, like
+```js
+let num = +prompt("Enter a number", "");
+```
+
 After `Symbol.toPrimitive`, JavaScript engines tries to find the following methods in order:
 * `toString` -> `valueOf` for "string" hint.
 * `valueOf` -> `toString` otherwise.
@@ -329,3 +334,47 @@ A special property `new.target` could be used to check whether the function is c
 
 Literally, `new` makes it obvious that new object is being created.
 
+
+## Methods of primitives
+Primitives also have methods, but unlike Java using *Object Wrappers*, JavaScript directly using `.method()` after primitives.
+
+### Numbers
+All numbers in JavaScript is represented in 64-bit IEEE-754 format.
+
+Some common use methods are:
+
+* `toString(base)` for string representations of numbers
+
+Common use `base` are: `base=16` for hex, `base=2` for binary and `base=36`(maximum ,"0-9", "a-z") for make things shorter.
+
+> If we directly call `toString(base)` after a number, we shall using *Two Dots syntax*, like `123456..toString(16)`.
+
+* `isFinite()` to validate whether a string value is a regular number.
+
+* `parseInt()`/`parseFloat()` to parse numbers with "soft" conversions, like `12px`, `31.4€`, etc.
+* `Math.random()` returns a random number ranging from [0,1).
+
+### Strings
+Internal format for strings is always UTF-16, it is not tied to the page encoding.
+
+* `length` property(Not a method)
+
+Strings are immutable in JavaScript. To workaround it, creating a new string and concatenate part of the old one.
+
+> The bitwise NOT(`~`) trick: when using `indexOf()` method to locate some required substring in `if` clause, the `0` means the first character and we can use `~n` which means `-(n+1)` to make the `if` clause works. :)
+```js
+if (~str.indexOf(...))
+```
+Though not so obvious, but rember this statements literally means "if found".
+
+* `slice(start, end)` to select substring from `start` to `end`(not including `end`) of the string.
+
+#### Diacritical marks and normalization
+In many languages there are symbols that are composed of the base cahracter with a mark above/under it. For instance, the letter`a` can be the base character for: `àáâäãåā`.
+```js
+console.log("S\u0307\u0323");   // Ṩ, S + dot above + dot below
+console.log("S\u0323\u0307");   // Ṩ, S + dot below + dot above
+```
+However, those two strings do not equal to each other as the mark order are different. To solve this, `str.normalize()` is here to help bring each string to the single "normal" form.
+
+> See the [Special Character Sample](../tests/jstest/DataType_StringTest.js)
