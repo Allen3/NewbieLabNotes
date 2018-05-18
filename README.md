@@ -44,6 +44,9 @@ Schedule: @May, 16th, 2018
 - [x] Section [Methods of primitives](https://javascript.info/primitives-methods)
 - [x] Section [Numbers](https://javascript.info/number)
 - [x] Section [Strings](https://javascript.info/string)
-- [ ] Section [Arrays](https://javascript.info/array)
-- [ ] Section [Array methods](https://javascript.info/array-methods)
-- [ ] Section [Iterables](https://javascript.info/iterable)
+
+Schedule: @May, 18th, 2018
+
+- [x] Section [Arrays](https://javascript.info/array)
+- [x] Section [Array methods](https://javascript.info/array-methods)
+- [x] Section [Iterables](https://javascript.info/iterable)

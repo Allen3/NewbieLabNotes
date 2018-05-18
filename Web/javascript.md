@@ -378,3 +378,67 @@ console.log("S\u0323\u0307");   // Ṩ, S + dot below + dot above
 However, those two strings do not equal to each other as the mark order are different. To solve this, `str.normalize()` is here to help bring each string to the single "normal" form.
 
 > See the [Special Character Sample](../tests/jstest/DataType_StringTest.js)
+
+## Array
+Internally, array is perceived as an object.
+
+Both the declaration statements are acceptable.
+```js
+let arr = new Array();
+let arr = [];
+```
+
+Loops in arrays syntax: `for..of`
+```js
+for (let fruit of fruits) {
+    //...
+}
+```
+> Syntax `for..in` is also acceptable for array loop but is **NOT RECOMMENDED** for the following reasons: 1. `for..in` iterates over *all properties*, not only the numeric ones; 2. `for..in` loop is optimized for generic objects, and much slower compared to its counterpart.
+
+The `length` property of an array is to record the greatest index of existing elements and explicitly setting `length` may cause the truncation of the array. As a result, the simplest way to clear the array is: `arr.length = 0`.
+
+Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, then implement only `toString` conversion.
+
+Some of the common used methods:
+* `push(...items)`: Add elements to the tail
+* `pop()`: Extract an item from the end
+* `shift()`: Extract an item from the head
+* `unshift(...items)`: Add elements from the head
+* `splice(index[, deleteCount, elem1, ..., elemN])`: Remove `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. In addition, Return the array of removed elements.
+* `slice(start, end)`: obtain subarray from `start` to `end`. Negative index assumes the start from tail. See [Array.slice() Sample](../tests/jstest/DataType_ArrayTest.js)
+* `concat(para1, ...)`: Copies new elements into array. For object, `Symbol.isConcatSpreadable` property is used to check whether append its elements inside or the object only.
+* `find((item, index, array) => {...}, thisArg)`: Provide a "predicate" function which returns `true` if meets the expected conditions. Only the first result will be returned. All the parameters of the function provided are optional. See [Array.find() Sample](../tests/jstest/DataType_ArrayTest.js)
+* `filter((item, index, array) => {...}, thisArg)`: Similar to `find()` but return a list of results.
+* `map((item, index, array) => {...}, thisArg)`: Return the new value instead of item. See [Array.map() Sample](../tests/jstest/DataType_ArrayTest.js)
+* `sort((elemA, elemB) => {...})`: With giving "compare" function to sort the elements.
+* `str.split(delim)`: Split the string into an array by the given delimiter `delim`.
+* `reduce( (previousValue, item, index, arr) => {}, initial )`: A general [reduce](https://en.wikipedia.org/wiki/Fold_\(higher-order_function\)) function from functional programming. See the [Array.reduce() Sample](../tests/jstest/DataType_ArrayTest.js)
+
+To help check the type of array, `Array.isArray(value)` is often used instead of `typeof` which may give unexpected result.
+
+> All the `thisArg` above is optional, which is useful when the function is an object' method and passing the object as `thisArg` would be helpful. See [thisArg Sample](../tests/jstest/DataType_ArrayTest.js)
+
+### Iterables
+
+Iterable objects are ones suitable for `for..of` and a method called `obj[Symbol.iterator]()` shall be implemented. The rules are as follows:
+
+* When `for..of` starts, it calls that method (or errors if not found).
+* The method must return an iterator - an object with the method `next`.
+* When `for..of` wants the next value, it calls `next()` on that object.
+* The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true` means that the iteration is finished, otherwise `value` must be the new value.
+
+Check the [Iterable Sample](../tests/jstest/DataType_IterableTest.js) for an example of implementation.
+
+> Note that the implementation has a **drawback** that multiple `for..of` loops running over the object simultaneously would cause unexpected faults, as there is only one iterator - the object itself.
+
+ Iterables v.s. Array-likes
+
+* *Iterables* are objects that implement the `Symbol.iterator` method.
+* *Array-likes* are objects that have indexes and `length`, so they look like arrays.
+
+Thus, an universal method `Array.from()` helps constructing an array from Iterables or Array-likes.
+```js
+Array.from(obj[, mapFn, thisArg]);
+```
+Where the mapFn is the function applied to each element.
