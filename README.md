@@ -50,3 +50,9 @@ Schedule: @May, 18th, 2018
 - [x] Section [Arrays](https://javascript.info/array)
 - [x] Section [Array methods](https://javascript.info/array-methods)
 - [x] Section [Iterables](https://javascript.info/iterable)
+
+Schedule: @May, 21st, 2018
+
+- [x] Section [Maps, Sets](https://javascript.info/map-set-weakmap-weakset)
+- [x] Section [Destructing Assignment](https://javascript.info/destructuring-assignment)
+- [ ] Sectino [JSON](https://javascript.info/json)

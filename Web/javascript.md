@@ -419,7 +419,14 @@ To help check the type of array, `Array.isArray(value)` is often used instead of
 
 > All the `thisArg` above is optional, which is useful when the function is an object' method and passing the object as `thisArg` would be helpful. See [thisArg Sample](../tests/jstest/DataType_ArrayTest.js)
 
-### Iterables
+### Destructing assignment
+
+Objects allow us to pack many pieces of information into a single entity and arrays allow us to store ordered collections. For example,
+```js
+let [firstName, surname] = "Ilya Kantor".split(' ');
+```
+
+## Iterables
 
 Iterable objects are ones suitable for `for..of` and a method called `obj[Symbol.iterator]()` shall be implemented. The rules are as follows:
 
@@ -442,3 +449,17 @@ Thus, an universal method `Array.from()` helps constructing an array from Iterab
 Array.from(obj[, mapFn, thisArg]);
 ```
 Where the mapFn is the function applied to each element.
+
+## JSON
+The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard.
+
+* `JSON.stringify()` to convert objects into JSON.
+* `JSON.parse()` to convert JSON back into an object.
+
+JSON is data-only cross-language specification, so some JavaScript-specific object properties are skipped by `JSON.stringify()`,namely:
+
+* Function properties (methods).
+* Symbolic properties.
+* Properties that store undefined.
+
+
