@@ -108,3 +108,5 @@ Normally we see jQuery scripts with this given blocks:
 
 The outer blocks is [IIFE(Immediately Invoked Function Expression)](http://benalman.com/news/2010/11/immediately-invoked-function-expression/).
 The purpose of passing jQuery in to the parenthesis is to provide local scoping to the global variable. This helps reduce the amount of overhead of looking up the $ variable, and allows better compression / optimization for minifiers in some cases.
+
+> Also refer to the [IIFE section](javascript.md/###IIFE) of JavaScript notes.

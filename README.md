@@ -56,3 +56,10 @@ Schedule: @May, 21st, 2018
 - [x] Section [Maps, Sets](https://javascript.info/map-set-weakmap-weakset)
 - [x] Section [Destructing Assignment](https://javascript.info/destructuring-assignment)
 - [x] Section [JSON](https://javascript.info/json)
+
+Schedule: @May, 22nd, 2018
+- New Chapter **Advanced working with functions** Start
+- [x] Section [Recursion and Stack](https://javascript.info/recursion)
+- [x] Section [Rest parameters and spread operators](https://javascript.info/rest-parameters-spread-operator)
+- [x] Section [Closure](https://javascript.info/closure)
+- [ ] Section [The old "var"](https://javascript.info/var)

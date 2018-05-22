@@ -463,3 +463,190 @@ JSON is data-only cross-language specification, so some JavaScript-specific obje
 * Properties that store undefined.
 
 If an object has `toJSON()`, then it is called by `JSON.stringify()`.
+
+## Rest parameters and spread operators
+Sample for *rest parameters*:
+```js
+function sumAll(...args) { // args is the name for the array
+  let sum = 0;
+
+  for (let arg of args) sum += arg;
+
+  return sum;
+}
+```
+Rest parameters can only position at the last.
+
+For the legacy's sake, we can also use `arguments[]` to access all the parameters but not in arrow functions.
+
+Sample for *spread operators*
+```js
+let arr = [3, 5, 1];
+
+alert( Math.max(...arr) ); // 5 (spread turns array into a list of arguments)
+```
+The spread operator internally uses iterators to gather elements, the same way as `for..of` does.
+
+> There’s a subtle difference between `Array.from(obj)` and `[...obj]`:
+>
+> * `Array.from` operates on both array-likes and iterables.
+> * The *spread operator* operates only on iterables.
+
+## Closure
+
+### Lexical Environment
+
+* A variable is a property of a special internal object, associated with the currently executing block/function/script.
+* Working with variables is actually working with the properties of that object.
+
+When code wants to access a variable – it is first searched for in the inner Lexical Environment, then in the outer one, then the more outer one and so on until the end of the chain.
+
+![Lexical Environment](/assets/lexical_environment.png)
+
+Thus, **A function gets outer variables as they are now; it uses the most recent values**.
+
+### Nested Functions
+
+A nested function can be returned: either as a property of a new object (if the outer function creates an object with methods) or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
+
+An example with the constructor function
+```js
+// constructor function returns a new object
+function User(name) {
+
+  // the object method is created as a nested function
+  this.sayHi = function() {
+    alert(name);
+  };
+}
+
+let user = new User("John");
+user.sayHi(); // the method code has access to the outer "name"
+```
+
+An example with returning a function:
+```js
+function makeCounter() {
+  let count = 0;
+
+  return function() {
+    return count++; // has access to the outer counter
+  };
+}
+
+let counter = makeCounter();
+
+alert( counter() ); // 0
+alert( counter() ); // 1
+alert( counter() ); // 2
+```
+
+### Environments in detail
+
+1. When the script has just started, there is only global Lexical Environment:
+
+    All functions “on birth” receive a hidden property [[Environment]] with a reference to the *Lexical Environment* of their creation.
+
+    In other words, a function is “imprinted” with a reference to the *Lexical Environment* where it was born. And [[Environment]] is the hidden function property that has that reference.
+
+2. The code runs on, and the call to `makeCounter()` is performed. Here’s a snapshot of the moment when the execution is on the first line inside `makeCounter()`:
+![closure phase 2](/assets/closure_phase_2.png)
+
+    As a *Lexical Environments*, it stores two things:
+
+    * An *Environment Record* with local variables. In our case count is the only local variable (appearing when the line with `let count` is executed).
+    * The outer lexical reference, which is set to [[Environment]] of the function. Here [[Environment]] of `makeCounter` references the global *Lexical Environment*.
+
+3. During the execution of `makeCounter()`, a tiny nested function is created.
+![closure phase 3](/assets/closure_phase_3.png)
+
+    For our new nested function the value of [[Environment]] is the current *Lexical Environment* of makeCounter() (where it was born).
+
+4. As the execution goes on, the call to `makeCounter()` finishes, and the result (the tiny nested function) is assigned to the global variable `counter`:
+![closure phase 4](/assets/closure_phase_4.png)
+
+5. When the `counter()` is called, an “empty” *Lexical Environment* is created for it. It has no local variables by itself. But the [[Environment]] of `counter` is used as the outer reference for it, so it has access to the variables of the former `makeCounter()` call where it was created:
+![closure phase 5](/assets/closure_phase_5.png)
+
+    Please note how memory management works here. Although `makeCounter()` call finished some time ago, its *Lexical Environment* was retained in memory, because there’s a nested function with [[Environment]] referencing it.
+
+    Generally, a *Lexical Environment* object lives as long as there is a function which may use it. And only when there are none remaining, it is cleared.
+
+6. The call to `counter()` not only returns the value of count, but also increases it. Note that the modification is done “in place”. The value of `count` is modified exactly in the environment where it was found.
+![closure phase 6](/assets/closure_phase_6.png)
+
+7. Next counter() invocations do the same.
+![closure phase 7](/assets/closure_phase_7.png)
+
+> There is a general programming term “closure”, that developers generally should know.
+>
+> A closure is a function that remembers its outer variables and can access them. In some languages, that’s not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript all functions are naturally closures (there is only one exclusion, to be covered in The "new Function" syntax).
+>
+> That is: they automatically remember where they were created using a hidden [[Environment]] property, and all of them can access outer variables.
+> 
+> When on an interview, a frontend developer gets a question about “what’s a closure?”, a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe few more words about technical details: the [[Environment]] property and how Lexical Environments work.
+
+### IIFE
+
+IIFE stands for "Immediately-invoked function expressions". And the form is like this:
+```js
+(function() {
+
+  let message = "Hello";
+
+  alert(message); // Hello
+
+})();
+```
+
+The *Function Expression* is wrapped with brackets `(function {...})`, because when JavaScript meets "function" in the main code flow, it understands it as the start of a *Function Declaration*. But a *Function Declaration* must have a name, so there will be an error:
+```js
+// Error: Unexpected token (
+function() { // <-- JavaScript cannot find function name, meets ( and gives error
+
+  let message = "Hello";
+
+  alert(message); // Hello
+
+}();
+```
+
+We can say “okay, let it be so *Function Declaration*, let’s add a name”, but it won’t work. JavaScript does not allow *Function Declarations* to be called immediately:
+```js
+// syntax error because of brackets below
+function go() {
+
+}(); // <-- can't call Function Declaration immediately
+```
+
+So, **round brackets are needed to show JavaScript that the function is created in the context of another expression**, and hence it’s a *Function Expression*. It needs no name and can be called immediately.
+
+
+There are also other ways to tell js we mean *Function Expression*:
+```js
+// Ways to create IIFE
+(function() {
+  alert("Brackets around the function");
+})();
+
+(function() {
+  alert("Brackets around the whole thing");
+}());
+
+!function() {
+  alert("Bitwise NOT operator starts the expression");
+}();
+
++function() {
+  alert("Unary plus starts the expression");
+}();
+```
+
+> As the *Lexical Environment* exists, *Closure* helps the tricks for declaration of private properties and the existence of inner variables.
+
+As we’ve seen, in theory while a function is alive, all outer variables are also retained.
+
+But in practice, JavaScript engines try to optimize that. They analyze variable usage and if it’s easy to see that an outer variable is not used – it is removed.
+
+**An important side effect in V8 (Chrome, Opera) is that such variable will become unavailable in debugging.**
+
