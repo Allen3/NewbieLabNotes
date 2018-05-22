@@ -55,4 +55,4 @@ Schedule: @May, 21st, 2018
 
 - [x] Section [Maps, Sets](https://javascript.info/map-set-weakmap-weakset)
 - [x] Section [Destructing Assignment](https://javascript.info/destructuring-assignment)
-- [ ] Sectino [JSON](https://javascript.info/json)
+- [x] Section [JSON](https://javascript.info/json)

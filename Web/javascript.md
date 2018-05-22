@@ -462,4 +462,4 @@ JSON is data-only cross-language specification, so some JavaScript-specific obje
 * Symbolic properties.
 * Properties that store undefined.
 
-
+If an object has `toJSON()`, then it is called by `JSON.stringify()`.
