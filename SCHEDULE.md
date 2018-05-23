@@ -15,7 +15,7 @@ General List(Sources are adhere behind):
 
 - [x] jQuery
 - [ ] JavaScript (https://javascript.info)
-- [ ] Node.js (https://livebook.manning.com/#!/book/node-js-in-action/)
+- [ ] Node.js (node-js-in-action)
 
 
 ## JavaScript
