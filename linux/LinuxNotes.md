@@ -69,7 +69,7 @@ netstat -ant | grep :80
 `$-`                      |  显示Shell使用的当前选项
 `$?`                      |  显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
 
-> 参考[test1](./tests/test1)
+> 参考[test1](/tests/test1/test.sh)
 
 * `if`语句
 
@@ -120,7 +120,7 @@ done
 
 * gcc 编译过程
 
-![GCC编译过程](assets/gcc_compiling_flowchart.png)
+![GCC编译过程](/assets/gcc_compiling_flowchart.png)
 
 * 重要参数与标志
 
@@ -194,7 +194,7 @@ system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule_
 
 执行时调用`make`命令,自动搜索名称为"makefile"或"Makefile"的文件,指定自定义文件参数为`-f`
 
->  参考[test2](./tests/test2/) 
+>  参考[test2](/tests/test2/) 
 
 >  其中myMakeFile采用了[suffix rule](https://www.gnu.org/software/make/manual/html_node/Suffix-Rules.html)
 
@@ -226,7 +226,7 @@ system commands(recipe): 所需要执行的操作. 格式遵从 __off-side rule_
 * Set of pending and blocked signals
 * Thread specific data.
 
-![进程 vs 线程](assets/diff_process_thread.png)
+![进程 vs 线程](/assets/diff_process_thread.png)
 
 通常将pthread API分为四类:(以`pthread_`为前缀)
 
@@ -265,5 +265,5 @@ asm [volatile] ( AssemblerTemplate
 
 同时需注意，`Intel`和`AMD`的**大端、小端**表示的区别。
 
-> 参考[cpuidtest](./tets/cpuidtest/)
+> 参考[cpuidtest](/tests/cpuidtest/)
 > 参考[cpuid](https://en.wikipedia.org/wiki/CPUID)
