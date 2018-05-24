@@ -61,7 +61,7 @@ function serveStatic(response, cache, absPath) {
     }
 }
 
-http.createServer((request, response) => {
+const server = http.createServer((request, response) => {
     let filePath = false;
 
     if (request.url == '/') {
@@ -75,3 +75,6 @@ http.createServer((request, response) => {
 }).listen(8080, () => {
     console.log("Server is listening on port 8080.");
 });
+
+const chatServer = require('./lib/chat_server');
+chatServer.listen(server);

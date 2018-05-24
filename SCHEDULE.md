@@ -64,4 +64,9 @@ Schedule: @May, 22nd, 2018
 
 ## Node.js
 Schedule: @May, 23rd, 2018
-- [x] Chapter 1
+- [ ] Part 1
+    - [x] Chapter 1
+
+Schedule: @May, 24th, 2018
+- [ ] Part 1
+    - [x] Chapter 2    

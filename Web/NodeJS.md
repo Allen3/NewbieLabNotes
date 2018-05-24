@@ -13,3 +13,4 @@ In browser, we often use *jQuery* to make an Ajax request while in server end, *
 Some examples are:
 * [A simple asynchronous example](/tests/nodejs/asyncDemo.js)
 * [A simple http image server](/tests/nodejs/imageServer.js)
+* [A multipersons chatroom application](/tests/nodejs/chatRoomsDemo)
