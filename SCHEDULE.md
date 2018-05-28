@@ -60,7 +60,6 @@ Schedule: @May, 22nd, 2018
 - [x] Section [Recursion and Stack](https://javascript.info/recursion)
 - [x] Section [Rest parameters and spread operators](https://javascript.info/rest-parameters-spread-operator)
 - [x] Section [Closure](https://javascript.info/closure)
-- [ ] Section [The old "var"](https://javascript.info/var)
 
 ## Node.js
 Schedule: @May, 23rd, 2018
@@ -70,3 +69,11 @@ Schedule: @May, 23rd, 2018
 Schedule: @May, 24th, 2018
 - [ ] Part 1
     - [x] Chapter 2    
+
+## JavaScript
+Schedule: @May, 28th, 2018
+Chapter **Advanced working with functions**
+- [x] Section [The old "var"](https://javascript.info/var)
+- [x] Section [GLobal object](https://javascript.info/global-object)
+- [x] Section [Function object, NFE](https://javascript.info/function-object)
+- [x] Section [The "new Function" syntax](https://javascript.info/new-function)

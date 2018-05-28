@@ -650,3 +650,95 @@ But in practice, JavaScript engines try to optimize that. They analyze variable 
 
 **An important side effect in V8 (Chrome, Opera) is that such variable will become unavailable in debugging.**
 
+### The old `var`
+1. `var` pierces through `if`, `for` or other code blocks. That’s because a long time ago in JavaScript blocks had no *Lexical Environments*. And var is a reminiscence of that.
+2. `var` declarations are processed when the function starts (or script starts for globals).
+
+## Global object
+The initial purpose for *global object* is to link several in-browser scripts by sharing variables.
+
+In a browser it is named “window”, for Node.JS it is “global”.
+> `let`&`const` variables are invisible from `global object` as they are not designed to inherit from the old convention.
+
+The usages are: 
+1. To access exactly the global variable if the function has the local one with the same name.
+
+2. To check if a certain global variable or a builtin exists.
+```js
+if (window.XMLHttpRequest) {    // call XMLHttpRequest directly would return undefined.
+  alert('XMLHttpRequest exists!');  
+}
+```
+Or we can use `typeof` to check the function, without *global object.*
+
+3. To take the variable from the right window. That’s probably the most valid use case.
+
+A browser may open multiple windows and tabs. A window may also embed another one in `<iframe>`. Every browser window has its own window object and global variables. JavaScript allows windows that come from the same site (same protocol, host, port) to access variables from each other.
+
+> When a function with `this` is called in non-strict mode, it gets the global object as `this`.
+
+## Function object, NFE
+In JavaScript, functions are objects.
+
+A good way to imagine functions is as callable “action objects”. We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
+
+A few usable properties:
+* `name`: returns the name of the function.
+* `length`: returns the number of function parameters.
+* custom properties: for instance,
+```js
+function sayHi() {
+  alert("Hi");
+
+  // let's count how many times we run
+  sayHi.counter++;
+}
+sayHi.counter = 0; // initial value
+
+sayHi(); // Hi
+sayHi(); // Hi
+
+alert( `Called ${sayHi.counter} times` ); // Called 2 times
+```
+> A property is not a variable
+A property assigned to a function like `sayHi.counter = 0` does not define a local variable `counter` inside it. In other words, a property `counter` and a variable `let counter` are two unrelated things.
+>
+> We can treat a function as an object, store properties in it, but that has no effect on its execution. Variables never use function properties and vice versa. These are just parallel words.
+
+When compared to *Closure*, the property could be easily modified by external code thus is not recommended to use in most case.
+
+### NFE
+*Named Function Expression*, or NFE, is a term for *Function Expressions* that have a name.
+
+There are two special things about the NFE:
+
+* It allows the function to reference itself internally.
+* It is not visible outside of the function.
+
+> Also, functions may carry additional properties. Many well-known JavaScript libraries make great use of this feature.
+> 
+> They create a “main” function and attach many other “helper” functions to it. For instance, the **jquery** library creates a function named `$`. The **lodash** library creates a function `_`. And then adds `_.clone`, `_.keyBy` and other properties to . Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+
+## `new` function syntax
+There’s one more way to create a function. It’s rarely used, but sometimes there’s no alternative.
+
+The syntax for creating a function:
+```js
+let func = new Function ([arg1[, arg2[, ...argN]],] functionBody)
+```
+
+All previous declarations required us, programmers, to write the function code in the script.
+
+But *`new` Function* allows to turn any string into a function. For example, we can receive a new function from a server and then execute it.
+
+Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the *Lexical Environment* from where it’s created.
+
+But when a function is created using new Function, its `[[Environment]]` references not the current *Lexical Environment*, but instead the global one.
+
+See the [new function demo](../tests/jstest/new_functionTest.js)
+
+Even if we could access outer *lexical environment* in *`new` Function*, we would have problems with minifiers.
+
+The “special feature” of *`new` Function* saves us from mistakes.
+
+And it enforces better code. If we need to pass something to a function created by *`new` Function*, we should pass it explicitly as an argument.
