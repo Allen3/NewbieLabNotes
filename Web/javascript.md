@@ -766,3 +766,54 @@ See the example: [Scheduler Sample](/tests/jstest/schedulerTest.js)
 > 
 > In the browser, there’s a limitation of how often nested timers can run. The HTML5 standard says: “after five nested timers, the interval is forced to be at least four milliseconds.”.
 > See the example [Scheduler Min Interval](/tests/jstest/minIntervalTest.js)
+
+## Decorators and Forwarding
+
+### Transparent caching
+Let’s say we have a function `slow(x)` which is CPU-heavy, but its results are stable. In other words, for the same x it always returns the same result.
+
+If the function is called often, we may want to cache (remember) the results for different `x` to avoid spending extra-time on recalculations.
+```js
+function cachingWrapper(func) {
+  let cache = new Map();
+  return function(x) {
+    if (cache.has(x)) {
+      return cache.get(x)
+    }
+    let result = func(x);
+
+    cache.set(x, result);
+    return result;
+  }
+}
+```
+For multi-args functions, we can add a hash function to wrap the arguments.
+
+However, this won't work for object methods which relies on `this` property. Some built-in function methods could address this problem:
+```js
+function.call(context, ...args);  
+function.apply(context, args);  arguments
+```
+The `context` parameter (which is the object) helps to pass reference to `this`.
+
+* The spread operator `...` allows to pass iterable args as the list to call.
+* The `apply` accepts only array-like args.
+
+So, these calls complement each other. Where we expect an iterable, `call` works, where we expect an array-like, `apply` works.
+
+
+> For performance's sake, the optimization of `apply` is better than `call` in situations both work.
+
+*Call Forwarding*:
+```js
+let wrapper = function() {
+  return anotherFunction.apply(this, arguments);
+};
+```
+
+*Method Borrowing*:
+```js
+function hash(arguments) {
+  return [].join.call(arguments) ;
+}
+```
