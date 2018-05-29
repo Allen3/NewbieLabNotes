@@ -124,6 +124,11 @@ let func = (arg1, arg2, ...argN) => expression
 ```
 and the `()` could be ignored if only one argument exists.
 
+Arrow functions: 
+* Do not have `this`.
+* Do not have `arguments`.
+* Can’t be called with `new`.
+
 ## Code Equality
 
 ### Coding style
@@ -767,9 +772,8 @@ See the example: [Scheduler Sample](/tests/jstest/schedulerTest.js)
 > In the browser, there’s a limitation of how often nested timers can run. The HTML5 standard says: “after five nested timers, the interval is forced to be at least four milliseconds.”.
 > See the example [Scheduler Min Interval](/tests/jstest/minIntervalTest.js)
 
-## Decorators and Forwarding
+## Decorators, Forwarding, Borrowing, Binding, Partial, Currying
 
-### Transparent caching
 Let’s say we have a function `slow(x)` which is CPU-heavy, but its results are stable. In other words, for the same x it always returns the same result.
 
 If the function is called often, we may want to cache (remember) the results for different `x` to avoid spending extra-time on recalculations.
@@ -792,7 +796,7 @@ For multi-args functions, we can add a hash function to wrap the arguments.
 However, this won't work for object methods which relies on `this` property. Some built-in function methods could address this problem:
 ```js
 function.call(context, ...args);  
-function.apply(context, args);  arguments
+function.apply(context, args);  
 ```
 The `context` parameter (which is the object) helps to pass reference to `this`.
 
@@ -816,4 +820,34 @@ let wrapper = function() {
 function hash(arguments) {
   return [].join.call(arguments) ;
 }
+```
+
+*Function Binding*
+```js
+let boundFunc = func.bind(context, ...args);
+```
+
+*Partial Function*
+```js
+function mul(a, b) {
+  return a * b;
+}
+
+let double = mul.bind(null, 2);
+
+double(3);
+double(4);
+```
+
+*Currying Funciton*
+```js
+function curry(func) {
+  return function(a) {
+    return function(b) {
+      return func(a, b);
+    };
+  };
+}
+
+func(a)(b);
 ```

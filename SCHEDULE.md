@@ -81,3 +81,4 @@ Chapter **Advanced working with functions**
 ](https://javascript.info/settimeout-setinterval)
 - [x] Section [Decorators and forwarding, call/apply
 ](https://javascript.info/call-apply-decorators)
+- [x] Section [Function binding](https://javascript.info/bind)
