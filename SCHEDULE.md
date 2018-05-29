@@ -77,3 +77,5 @@ Chapter **Advanced working with functions**
 - [x] Section [GLobal object](https://javascript.info/global-object)
 - [x] Section [Function object, NFE](https://javascript.info/function-object)
 - [x] Section [The "new Function" syntax](https://javascript.info/new-function)
+- [x] Section [Scheduling: setTimeout and setInterval
+](https://javascript.info/settimeout-setinterval)

@@ -742,3 +742,27 @@ Even if we could access outer *lexical environment* in *`new` Function*, we woul
 The “special feature” of *`new` Function* saves us from mistakes.
 
 And it enforces better code. If we need to pass something to a function created by *`new` Function*, we should pass it explicitly as an argument.
+
+## Scheduling
+* `setTimeout()`: allows to run a function once after the interval of time.
+* `setInterval()`: allows to run a function regularly with the interval between the runs.
+
+Using recursive `settimeout()` could implement running codes repeatedly like `setInterval()`, but with a slight difference.
+
+* **The real delay between func calls for `setInterval()` is less than in the code** because the time taken by function's execution “consumes” a part of the interval.
+![setInterval](/assets/diagram_setInterval.png)
+* **The recursive `setTimeout()` guarantees a fixed delay**.
+![recursively setTimeout](/assets/diagram_RecursivelysetTimeout.png)
+
+A special use case: `setTimeout(function, 0)`.
+
+This schedules the execution of function  as soon as possible. But scheduler will invoke it only after the current code is complete.
+
+So the function is scheduled to run “right after” the current code. In other words, asynchronously.
+
+See the example: [Scheduler Sample](/tests/jstest/schedulerTest.js)
+
+> Minimal delay of nested timers in-browser
+> 
+> In the browser, there’s a limitation of how often nested timers can run. The HTML5 standard says: “after five nested timers, the interval is forced to be at least four milliseconds.”.
+> See the example [Scheduler Min Interval](/tests/jstest/minIntervalTest.js)
