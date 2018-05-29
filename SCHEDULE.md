@@ -77,8 +77,16 @@ Chapter **Advanced working with functions**
 - [x] Section [GLobal object](https://javascript.info/global-object)
 - [x] Section [Function object, NFE](https://javascript.info/function-object)
 - [x] Section [The "new Function" syntax](https://javascript.info/new-function)
+
+Schedule: @May, 29th, 2018
 - [x] Section [Scheduling: setTimeout and setInterval
 ](https://javascript.info/settimeout-setinterval)
 - [x] Section [Decorators and forwarding, call/apply
 ](https://javascript.info/call-apply-decorators)
 - [x] Section [Function binding](https://javascript.info/bind)
+
+* New Chapter **Objects, classes, inheritance** Start
+- [x] Section [Property flags and descriptors](https://javascript.info/property-descriptors)
+- [x] Section [Property getters and setters](https://javascript.info/property-accessors)
+- [x] Section [Prototypal inheritance](https://javascript.info/prototype-inheritance)
+- [ ] Section [F.prototype](https://javascript.info/function-prototype)

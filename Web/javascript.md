@@ -851,3 +851,123 @@ function curry(func) {
 
 func(a)(b);
 ```
+
+## Property flags and descriptors
+For Objects, there are three special attributes("flags"):
+* `writable` – if `true`, can be changed, otherwise it’s read-only.
+* `enumerable` – if `true`, then listed in loops, otherwise not listed. It decides whether the property shows in `for..in` loop or not.
+* `configurable` – if `true`, the property can be deleted and these attributes can be modified, otherwise not. Making a property non-configurable is a **ONE-WAY ROAD**. We cannot change it back, because `defineProperty` doesn’t work on non-configurable properties.
+
+To check the flags, we can use 
+```js
+let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
+```
+
+To modify the flags, we can use
+```js
+Object.defineProperty(obj, propertyName, descriptor)
+```
+
+If the property exists, `defineProperty` updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed `false`.
+
+A “flags-aware” way of cloning an object:
+```js
+let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
+```
+
+## Property getters/setters
+* *Data Properties*. We already know how to work with them. Actually, all properties that we’ve been using till now were data properties.
+* *Accessor Properties*. They are essentially functions that work on getting and setting a value, but look like regular properties to an external code.
+
+```js
+let obj = {
+  get propName() {
+    // getter, the code executed on getting obj.propName
+  },
+
+  set propName(value) {
+    // setter, the code executed on setting obj.propName = value
+  }
+};
+```
+See the [example](/tests/jstest/Object_PropertyTest.js)
+
+> *Accessor Properties* are only accessible with `get/set`
+> 
+> A property can either be a “data property” or an “accessor property”, but not both.
+
+So an accessor descriptor may have:
+
+* `get` – a function without arguments, that works when a property is read,
+* `set` – a function with one argument, that is called when the property is set,
+* `enumerable` – same as for data properties,
+* `configurable` – same as for data properties.
+
+`getters/setters` can be used as wrappers over “real” property values to gain more control over them.
+
+For instance, if we want to forbid too short names for `user`, we can store name in a special property `_name`. And filter assignments in the setter:
+```js
+let user = {
+  get name() {
+    return this._name;
+  },
+
+  set name(value) {
+    if (value.length < 4) {
+      alert("Name is too short, need at least 4 characters");
+      return;
+    }
+    this._name = value;
+  }
+};
+
+user.name = "Pete";
+alert(user.name); // Pete
+
+user.name = ""; // Name is too short...
+```
+Technically, the external code may still access the name directly by using `user._name`. But there is a widely known agreement that properties starting with an underscore "_" are internal and should not be touched from outside the object.
+
+## Prototypal Inheritance
+
+### [[Prototype]]
+In JavaScript, objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either null or references another object. That object is called “a prototype”:
+![prototype](/assets/prototype_proto.png)
+
+That `[[Prototype]]` has a “magical” meaning. When we want to read a property from object, and it’s missing, JavaScript automatically takes it from the prototype. In programming, such thing is called “prototypal inheritance”.
+
+To set it, `__proto__` is the `getter/setter` for it.
+
+There are actually three limitations:
+
+* The references can’t go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
+* The value of `__proto__` can be either an object or null. All other values (like primitives) are ignored.
+* There can be only one `[[Prototype]]`. An object may not inherit from two others.
+
+### F.prototype
+In the old times, there was another (and the only) way to set `__proto__`: to use a "prototype" property of the constructor function.
+
+As we know already, `new F()` creates a new object.
+
+When a new object is created with `new F()`, the object’s `[[Prototype]]` is set to `F.prototype`.
+
+In other words, if `F` has a prototype property with a value of the object type, then `new` operator uses it to set `[[Prototype]]` for the new object.
+
+For example:
+
+```js
+let animal = {
+  eats: true
+};
+
+function Rabbit(name) {
+  this.name = name;
+}
+
+Rabbit.prototype = animal;
+
+let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
+
+alert( rabbit.eats ); // true
+```
+
