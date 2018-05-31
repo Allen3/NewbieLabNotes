@@ -1135,3 +1135,56 @@ As we can see, methods are lexically not inside function `Obj`, they do not shar
 So, there is a widely known agreement that internal properties and methods are prepended with an underscore "_". Like `_name` or `_calcAge()`. Technically, that’s just an agreement, the outer code still can access them. But most developers recognize the meaning of "_" and try not to touch prefixed properties and methods in the external code.
 
 > The *Prototypal pattern* is more memory-efficient than *Function class pattern*  as different objects share the same function instead of creating a copy on each instance.
+
+### Class
+The new syntax is as follows:
+```js
+class MyClass {
+  constructor(...) {
+    // ...
+  }
+  method1(...) {}
+  method2(...) {}
+  get something(...) {}
+  set something(...) {}
+  static staticMethod(..) {}
+  // ...
+}
+```
+
+The `class MyClass {...}` here actually does two things:
+
+* Declares a variable User that references the function named "constructor".
+* Puts methods listed in the definition into `MyClass.prototype`.
+
+Here are some features of `class` syntax:
+* Constructors require `new`
+* Class methods are non-enumerable
+* Classes have a default `constructor() {}`
+* Classes always `use strict`
+* Only methods: Unlike object literals, no `property:value` assignments are allowed inside `class`. There may be only methods and getters/setters.(We can use getters/setters to achieve that goal)
+
+
+*Class Expression*: 
+
+Just like functions, classes can be defined inside another expression, passed around, returned etc as they are just a special form of a function-with-prototype definition.
+
+*Static Methods*:
+
+We can also assign methods to the class function, not to its `prototype`. 
+
+```js
+class Obj {
+  static staticMethod() {
+
+  }
+}
+```
+equals
+```js
+function Obj() {};
+Obj.staticMethod = function() {
+
+}
+```
+

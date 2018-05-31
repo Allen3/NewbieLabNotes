@@ -95,3 +95,4 @@ Schedule: @May, 31rd, 2018
 - [x] Section [Native prototypes](https://javascript.info/native-prototypes)
 - [x] Section [Methods for prototypes](https://javascript.info/prototype-methods)
 - [x] Section [Class Patterns](https://javascript.info/class-patterns)
+- [x] Section [Classes](https://javascript.info/class)
