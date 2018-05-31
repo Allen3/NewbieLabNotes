@@ -1018,3 +1018,52 @@ By specification, all built-in prototypes have `Object.prototype` on the top. So
 > During the process of development we may have ideas which new built-in methods we’d like to have. And there may be a slight temptation to add them to native prototypes. But that is generally a bad idea.
 > 
 > In modern programming, there is only one case when modifying native prototypes is approved. That’s *polyfills*. In other words, if there’s a method in JavaScript specification that is not yet supported by our JavaScript engine (or any of those that we want to support), then may implement it manually and populate the built-in prototype with it.
+
+### Methods for prototypes
+* `Object.create(proto[, descriptors])` – creates an empty object with given proto as `[[Prototype]]` and optional property descriptors.
+* `Object.getPrototypeOf(obj)` – returns the `[[Prototype]]` of `obj`.
+* `Object.setPrototypeOf(obj, proto)` – sets the `[[Prototype]]` of `obj` to proto.
+
+A truly exact cloning, including all properties: enumerable and non-enumerable, data properties and setters/getters – everything, and with the right [[Prototype]].
+```js
+let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+```
+
+**Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify**
+
+### “Very plain” Objects
+
+If we try to store user-provided keys in aobject (for instance, a user-entered dictionary), we can see an interesting glitch: all keys work fine except `__proto__`.
+For instance:
+
+```js
+let obj = {};
+
+let key = prompt("What's the key?", "__proto__");
+obj[key] = "some value";
+
+alert(obj[key]); // [object Object], not "some value"!
+```
+
+That shouldn’t surprise us. The `__proto__` property is special: it must be either an object or null, a string can not become a prototype.
+
+But we did not intend to implement such behavior, right? We want to store key/value pairs, and the key named `__proto__` was not properly saved. So that’s a bug. Here the consequences are not terrible. But in other cases the prototype may indeed be changed, so the execution may go wrong in totally unexpected ways.
+
+What’s worst – usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+
+To evade this problem, we can use `Map`. But `Object` also can serve us well here, because language creators gave a thought to that problem long ago.
+
+The `__proto__` is not a property of an object, but an accessor property of `Object.prototype`:
+![True prototype](/assets/prototype_polymorph.png)
+
+So, if `obj.__proto__` is read or assigned, the corresponding getter/setter is called from its prototype, and it gets/sets `[[Prototype]]`.
+
+As it was said in the beginning: `__proto__` is a way to access `[[Prototype]]`, it is not `[[Prototype]]` itself.
+
+And we can update the code snippet by changing the declaring statement into:
+```js
+let obj = Object.create(null);
+```
+The `[[prototype]]` is null and apparently, no setter/getter inherited for `__proto__`.
+
+We can call such object “very plain” or “pure dictionary objects”, because they are even simpler than regular plain object `{...}`.(On the otherside, this sort of objects lack any built-in object methods.)
