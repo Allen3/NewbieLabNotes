@@ -89,4 +89,6 @@ Schedule: @May, 29th, 2018
 - [x] Section [Property flags and descriptors](https://javascript.info/property-descriptors)
 - [x] Section [Property getters and setters](https://javascript.info/property-accessors)
 - [x] Section [Prototypal inheritance](https://javascript.info/prototype-inheritance)
-- [ ] Section [F.prototype](https://javascript.info/function-prototype)
+
+Schedule: @May, 31rd, 2018
+- [x] Section [F.prototype](https://javascript.info/function-prototype)

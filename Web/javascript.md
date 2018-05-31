@@ -971,3 +971,35 @@ let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
 alert( rabbit.eats ); // true
 ```
 
+The default "prototype" is an object with the only property `constructor` that points back to the function itself.
+
+```js
+function Rabbit() {}
+// by default:
+// Rabbit.prototype = { constructor: Rabbit }
+
+alert( Rabbit.prototype.constructor == Rabbit ); // true
+```
+
+**JavaScript itself does not ensure the right "constructor" value.**
+
+Compare the following to code snippets.
+```js
+function Rabbit() {}
+Rabbit.prototype = {
+  jumps: true
+};
+
+let rabbit = new Rabbit();
+alert(rabbit.constructor === Rabbit); // false
+```
+
+```js
+function Rabbit() {}
+
+// Not overwrite Rabbit.prototype totally
+// just add to it
+Rabbit.prototype.jumps = true
+// the default Rabbit.prototype.constructor is preserved
+```
+
