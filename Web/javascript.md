@@ -1067,3 +1067,71 @@ let obj = Object.create(null);
 The `[[prototype]]` is null and apparently, no setter/getter inherited for `__proto__`.
 
 We can call such object “very plain” or “pure dictionary objects”, because they are even simpler than regular plain object `{...}`.(On the otherside, this sort of objects lack any built-in object methods.)
+
+## Class Patterns
+Firstly, we'll cover several patterns implementing the idea of **Class** without `class` keyword expliclty.
+
+* *Functional class pattern*: 
+```js
+function Obj(...innerProperties) {
+  function privateMethod() {  
+  }
+
+  this.publicMethod = function() {
+    // operate on inner properties
+  }
+}
+
+let obj = new Obj(...params);
+obj.publicMethod();
+```
+* It is a “program-code-template” for creating objects (callable with `new`).
+* It provides initial values for the state.
+* It provides methods.
+
+This way we can hide internal implementation details and helper methods from the outer code. Only what’s assigned to `this` becomes visible outside.
+
+* *Factory class pattern:*
+```js
+function Obj(...innerProperties) {
+  function innerFunction() {
+
+  }
+
+  return {
+    publicMethod() {
+      // Operate on inner properties.
+    }
+  };
+}
+```
+As we can see, the function `Obj` returns an object with public properties and methods. The only benefit of this method is that we can omit `new`.
+
+* *Prototype-based classes*
+```js
+function Obj(...innerProperties) {
+  this._innerProp1 = innerProperties[0];
+  this._innerProp2 = innerProperties[1];
+  //...
+}
+
+Obj.prototype._privateMethod = function() {
+}
+
+OBj.prototype.publicMethod = function() {
+
+}
+```
+* The constructor `Obj` only initializes the current object state.
+* Methods are added to `Obj.prototype`.
+
+As for inherritence, we can declare:
+```js
+Obj.prototype.__proto__ = ParentObj.prototype;
+```
+
+As we can see, methods are lexically not inside function `Obj`, they do not share a common *lexical environment*. If we declare variables inside function `Obj`, then they won’t be visible to methods.
+
+So, there is a widely known agreement that internal properties and methods are prepended with an underscore "_". Like `_name` or `_calcAge()`. Technically, that’s just an agreement, the outer code still can access them. But most developers recognize the meaning of "_" and try not to touch prefixed properties and methods in the external code.
+
+> The *Prototypal pattern* is more memory-efficient than *Function class pattern*  as different objects share the same function instead of creating a copy on each instance.
