@@ -951,6 +951,8 @@ As we know already, `new F()` creates a new object.
 
 When a new object is created with `new F()`, the object’s `[[Prototype]]` is set to `F.prototype`.
 
+![F.prototype results](/assets/F_prototype.png)
+
 In other words, if `F` has a prototype property with a value of the object type, then `new` operator uses it to set `[[Prototype]]` for the new object.
 
 For example:
