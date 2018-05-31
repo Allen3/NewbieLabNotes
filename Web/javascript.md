@@ -818,7 +818,7 @@ let wrapper = function() {
 *Method Borrowing*:
 ```js
 function hash(arguments) {
-  return [].join.call(arguments) ;
+  return [].join.call(arguments); //equals Array.prototype.join.call(arguments)
 }
 ```
 
@@ -1005,3 +1005,16 @@ Rabbit.prototype.jumps = true
 // the default Rabbit.prototype.constructor is preserved
 ```
 
+### Native Prototypes
+```js
+let obj1 = {};
+let obj2 = new Object(); 
+```
+
+That two statements above equal. `Object` – is a built-in object constructor function.
+
+By specification, all built-in prototypes have `Object.prototype` on the top. Sometimes people say that “everything inherits from objects”.
+
+> During the process of development we may have ideas which new built-in methods we’d like to have. And there may be a slight temptation to add them to native prototypes. But that is generally a bad idea.
+> 
+> In modern programming, there is only one case when modifying native prototypes is approved. That’s *polyfills*. In other words, if there’s a method in JavaScript specification that is not yet supported by our JavaScript engine (or any of those that we want to support), then may implement it manually and populate the built-in prototype with it.
