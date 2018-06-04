@@ -36,6 +36,7 @@ Nodes       | Including the text nodes, element nodes, and even comment nodes if
 Elements    | Only elements included.
 
 There are 6 main methods to search for nodes in *DOM*:
+
 Method                  | Searches by...    | Can call on an element?   | Live?
 ----                    | ----              | ----                      | ----
 `getElementById`        | `id`              | -                         | -
