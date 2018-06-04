@@ -100,9 +100,16 @@ Schedule: @May, 31rd, 2018
 
 Schedule: @June, 4th, 2018
 
+## Browser specs
 New Division: **Browser: Document, Events, Interfaces** started.
 - [x] Section [Browser environment, specs](https://javascript.info/browser-environment)
 - [x] Section [DOM tree](https://javascript.info/dom-nodes)
 - [x] Section [Walking the DOM](https://javascript.info/dom-navigation)
 - [x] Section [Searching: getElement* and querySelector*
 ](https://javascript.info/searching-elements-dom)
+
+## Node.js
+
+- [ ] Part 1
+    - [ ] Chapter 3
+        - [x] Section 1
