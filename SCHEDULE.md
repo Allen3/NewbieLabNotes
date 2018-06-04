@@ -16,6 +16,7 @@ General List(Sources are adhere behind):
 - [x] jQuery
 - [ ] JavaScript (https://javascript.info)
 - [ ] Node.js (node-js-in-action)
+- [ ] Browser specs(https://javascript.info)
 
 
 ## JavaScript
@@ -96,3 +97,12 @@ Schedule: @May, 31rd, 2018
 - [x] Section [Methods for prototypes](https://javascript.info/prototype-methods)
 - [x] Section [Class Patterns](https://javascript.info/class-patterns)
 - [x] Section [Classes](https://javascript.info/class)
+
+Schedule: @June, 4th, 2018
+
+New Division: **Browser: Document, Events, Interfaces** started.
+- [x] Section [Browser environment, specs](https://javascript.info/browser-environment)
+- [x] Section [DOM tree](https://javascript.info/dom-nodes)
+- [x] Section [Walking the DOM](https://javascript.info/dom-navigation)
+- [x] Section [Searching: getElement* and querySelector*
+](https://javascript.info/searching-elements-dom)
