@@ -118,8 +118,8 @@ Schedule: @June, 5th, 2018
 
 ## Node.js
 
-- [ ] Part 1
-    - [ ] Chapter 3
+- [x] Part 1
+    - [x] Chapter 3
         - [x] Section 1
         - [x] Section 2
-        - [ ] Section 3
+        - [x] Section 3
