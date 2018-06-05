@@ -113,3 +113,13 @@ New Division: **Browser: Document, Events, Interfaces** started.
 - [ ] Part 1
     - [ ] Chapter 3
         - [x] Section 1
+
+Schedule: @June, 5th, 2018
+
+## Node.js
+
+- [ ] Part 1
+    - [ ] Chapter 3
+        - [x] Section 1
+        - [x] Section 2
+        - [ ] Section 3

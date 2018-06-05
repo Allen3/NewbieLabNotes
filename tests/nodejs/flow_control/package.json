@@ -1,0 +1,14 @@
+{
+  "name": "flow_control",
+  "version": "1.0.0",
+  "description": "Flow Control test based on Nimble",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Allen_3",
+  "license": "ISC",
+  "dependencies": {
+    "nimble": "0.0.2"
+  }
+}

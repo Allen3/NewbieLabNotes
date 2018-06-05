@@ -41,7 +41,7 @@ exported, `exports` will no longer work as expected—it doesn’t reference `mo
 Here are the diagram of steps finding a module:
 ![steps_finding_a_node](/assets/steps_to_finding_a_module.png)
 
-Two caveats:
+**Two caveats:**
 
 * First, if a module is a directory, the file in the module directory that will be evaluated must be named `index.js`, unless specified otherwise by a file in the module directory named `package.json`, using the syntax:
 ```js
@@ -57,3 +57,24 @@ the module’s source files. The second require will, in fact, have the opportun
 to alter the cached data. This “monkey patching” capability allows one module to
 modify the behavior of another, freeing the developer from having to create a new
 version of it.
+
+A built-in util module uses `inherits` function to inherit another object's behavior in a clean way.
+```js
+let events = require('events');
+let util = require('util');
+
+util.inherits(Clone, events.EventEmitter);
+```
+equals
+```js
+Clone.prototype = new events.EventEmitter();
+```
+
+## Flow Control
+
+**Nimble** is a flow-control tool to make code look organized and easy to maintain.
+```shell
+npm install nimble
+```
+
+See the example of [Nimble Serialize Demo](/tests/nodejs/flow_control)
