@@ -129,6 +129,8 @@ Arrow functions:
 * Do not have `arguments`.
 * Can’t be called with `new`.
 
+> In jQuery, inside `.on(eventType, fn)`'s callback function `fn` always refer to `$(this)` to retrieve the target object. However, if we use arrow function instead of plain anonymous function, we should call `$(event.currentTarget)` to achieve our goal as `this` is ignored in arrow function.
+
 ## Code Equality
 
 ### Coding style
