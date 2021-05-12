@@ -4,3 +4,4 @@ Currently the topics are:
 
 * [Linux](/linux)
 * [Web](/Web)
+* [MachineLearning](/MachineLearning)
